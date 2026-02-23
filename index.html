@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THAT CURSED VERNA by Rishand</title>
+    <style>
+        /* --- GLOBAL STYLES --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto:wght@300;400&display=swap');
+
+        :root {
+            --primary-color: #ff3b3b; /* "Cursed" Red Accent */
+            --bg-color: #0a0a0a;
+            --card-bg: #161616;
+            --text-color: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HERO SECTION (Background & Description) --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            /* REPLACE 'bg.jpg' WITH YOUR BACKGROUND IMAGE NAME */
+            background-image: url('main.jpeg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Dark overlay to make text readable */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(10,10,10,1));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7); /* Glassmorphism effect */
+            backdrop-filter: blur(5px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 59, 59, 0.6);
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .mod-list {
+            text-align: left;
+            display: inline-block;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .mod-list li {
+            list-style: none;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .mod-list li::before {
+            content: "🔹";
+            margin-right: 10px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 15px 35px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 15px rgba(255, 59, 59, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 59, 59, 0.8);
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-section {
+            padding: 60px 20px;
+            max-width: 1400px; /* INCREASED from 1200px to 1400px for bigger display */
+            margin: 0 auto;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            left: 50%;
+            position: relative;
+            transform: translateX(-50%);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* INCREASED from 300px to 500px */
+            gap: 20px; /* Slightly increased gap for better spacing */
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Hover Effect: Zoom and darken */
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.1);
+        }
+        
+        .gallery-item::after {
+            content: '🔗 View on Instagram';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: bold;
+            color: white;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #000;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .mod-list { text-align: left; }
+            .gallery-grid { grid-template-columns: 1fr; } /* Stack vertically on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>THAT <span>CURSED</span> VERNA</h1>
+            <p>Meet 'That Cursed Verna' - a 2020 Hyundai Verna SX, owned by Rishand. This infamous ride has taken social media by storm with its bold mods! 🛣️</p>
+            
+            <ul class="mod-list">
+                <li>Z-Black tints</li>
+                <li>Modified headlights</li>
+                <li>Valvetronic exhaust</li>
+                <li>K&N air filter</li>
+                <li>Sexy rear spoiler</li>
+                <li>Front fenders</li>
+                <li>...and many more mods on the way!</li>
+            </ul>
+
+            <br>
+            <a href="https://www.instagram.com/that.cursed.verna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="cta-btn">
+                Catch Updates on Insta 🚀
+            </a>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section class="gallery-section">
+        <h2 class="gallery-header">The Gallery</h2>
+        
+        <div class="gallery-grid">
+            <!-- Photo 1 -->
+            <a href=" https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3532334461616522307&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p1.jpeg" alt="Verna Mod 1">
+            </a>
+
+            <!-- Photo 2 -->
+            <a href=" https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3584659338721982191&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p2.jpeg" alt="Verna Mod 2">
+            </a>
+
+            <!-- Photo 3 -->
+            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3450551326621337288&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p3.jpeg" alt="Verna Mod 3">
+            </a>
+
+            <!-- Photo 4 -->
+            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3525805903146425713&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p4.jpeg" alt="Verna Mod 4">
+            </a>
+
+            <!-- Video 5 (Replaced p5.jpeg) -->
+            <a href="https://www.instagram.com/reel/DT5clxiEbq5/?igsh=MTg3YnY0dHlvaDVrZQ==" class="gallery-item">
+                <video autoplay loop muted playsinline poster="p5_poster.jpeg">
+                    <source src="p5.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+
+            <!-- Photo 6 -->
+            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3464227556755310000&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p6.jpeg" alt="Verna Mod 6">
+            </a>
+
+            <!-- Photo 7 -->
+            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3505532109400075093&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p7.jpeg" alt="Verna Mod 7">
+            </a>
+
+            <!-- Photo 8 -->
+            <a href="https://www.instagram.com/p/DJUbW23Tn-r/?igsh=NGE3em56aGplZmNl" target="_blank" class="gallery-item">
+                <img src="p8.jpeg" alt="Verna Mod 8">
+            </a>
+
+            <!-- Photo 9 -->
+            <a href="https://www.instagram.com/p/DFcnElJTfTl/?igsh=MXR5MmlybjR4YzRuYg== " class="gallery-item">
+                <img src="p9.jpeg" alt="Verna Mod 9">
+            </a>
+
+            <!-- Photo 10 -->
+            <a href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDMyNzA1MjY3MjYwNzQw?story_media_id=3451500940937756778&igsh=MTJzcjk2a2hmMWkxcQ==" target="_blank" class="gallery-item">
+                <img src="p10.jpeg" alt="Verna Mod 10">
+            </a>
+
+            <!-- Photo 11 -->
+            <a href="https://www.instagram.com/p/DOBnQBSE6Hv/?igsh=NnVwN2hvbDlzYnh3" target="_blank" class="gallery-item">
+                <img src="p11.jpeg" alt="Verna Mod 11">
+            </a>
+
+            <!-- Video 12 (Replaced p12.jpeg) -->
+            <a href="https://www.instagram.com/reel/DPB7uAtE5te/?igsh=eTg1eTJ6eWZpN3hu" target="_blank" class="gallery-item">
+                <video autoplay loop muted playsinline poster="p12_poster.jpeg">
+                    <source src="p12.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </a>
+
+            <!-- Photo 13 -->
+            <a href="https://www.instagram.com/p/DLt2ZAqxdof/?igsh=MXRoOW41YmVmZDUzeg==" target="_blank" class="gallery-item">
+                <img src="p13.jpeg" alt="Verna Mod 13">
+            </a>
+
+            <!-- Photo 14 -->
+            <a href="https://www.instagram.com/p/DU7kcMuER3k/?igsh=ZThrcDVka2pyZmEz" target="_blank" class="gallery-item">
+                <img src="p14.jpeg" alt="Verna Mod 14">
+            </a>
+
+            <!-- Photo 15 -->
+            <a href="https://www.instagram.com/that.cursed.verna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="gallery-item">
+                <img src="p15.jpeg" alt="Verna Mod 15">
+            </a>
+
+            <!-- Photo 16 -->
+            <a href="https://www.instagram.com/that.cursed.verna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="gallery-item">
+                <img src="p16.jpeg" alt="Verna Mod 16">
+            </a>
+
+            <!-- Photo 17 -->
+            <a href="https://www.instagram.com/p/DRTgp_1ET3l/?igsh=MWI3MnRyMmNhaWkzZQ==" target="_blank" class="gallery-item">
+                <img src="p17.jpeg" alt="Verna Mod 17">
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 THAT CURSED VERNA. Designed for Rishand. By Nauto</p>
+        <p>Follow on Instagram: <a href="https://www.instagram.com/that.cursed.verna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" style="color: #E1306C;">@that.cursed.verna</a></p>
+    </footer>
+
+</body>
+</html>
